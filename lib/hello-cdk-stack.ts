@@ -23,17 +23,28 @@ export class HelloCdkStack extends cdk.Stack {
 			`),
 		})
 
-    // Define the Lambda function URL resource
-    const myFunctionUrl = myFunction.addFunctionUrl({
-		authType: lambda.FunctionUrlAuthType.NONE,
-	  });
-  
-	  // Define a CloudFormation output for your URL
-	  new cdk.CfnOutput(this, "myFunctionUrlOutput", {
-		value: myFunctionUrl.url,
-	  })
+		// Define the Lambda function URL resource
+		const myFunctionUrl = myFunction.addFunctionUrl({
+			authType: lambda.FunctionUrlAuthType.NONE,
+		})
+
+		// Define an S3 bucket resource
+		const myBucket = new s3.Bucket(this, 'MyBucket', {
+			bucketName: 'cubete',
+			versioned: true, 
+			removalPolicy: cdk.RemovalPolicy.DESTROY, // Optional: Automatically delete the bucket when the stack is deleted
+			autoDeleteObjects: true, // Optional: Automatically delete objects in the bucket when the bucket is deleted
+		})
+
+		// CloudFormation output for the URL
+		new cdk.CfnOutput(this, 'myFunctionUrlOutput', {
+			value: myFunctionUrl.url,
+		})
 
 
-
+		   // CloudFormation output for your S3 bucket name
+		   new cdk.CfnOutput(this, 'myBucketNameOutput', {
+            value: myBucket.bucketName,
+        })
 	}
 }

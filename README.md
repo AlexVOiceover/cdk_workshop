@@ -1,8 +1,11 @@
 # Welcome to your CDK TypeScript project
 
-This is a blank project for CDK development with TypeScript.
+This example deploys a lambda function and a s3 bucket using cloudfront
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+To interact with the S3 bucket you can upload there a file using:
+```vsh
+ aws s3 cp /PATH_TO_FILE s3://cubete/  
+```
 
 ## Useful commands
 
@@ -12,3 +15,4 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npx cdk deploy`  deploy this stack to your default AWS account/region
 * `npx cdk diff`    compare deployed stack with current state
 * `npx cdk synth`   emits the synthesized CloudFormation template
+
